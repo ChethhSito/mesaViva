@@ -54,7 +54,7 @@ Este proyecto usa Next.js 16.3.6, Supabase Auth, PostgreSQL y Realtime. La image
 
    Abre `http://127.0.0.1:3000`. Prueba acceso del personal, menú QR, pedido, cocina y cuenta. Detén la prueba con `Ctrl+C`.
 
-5. Para mantener la aplicación iniciada al arrancar Pop!_OS, usa Quadlet de Podman. Crea `~/.config/containers/systemd/mesa-viva.container` con este contenido y sustituye `USUARIO` por el nombre real de tu usuario Linux:
+5. Para mantener la aplicación iniciada al arrancar Pop!_OS, usa Quadlet de Podman **si la versión instalada lo incluye y usa cgroup v2**. Comprueba `podman --version` y `podman info --format '{{.Host.CgroupVersion}}'`; si tu versión no genera servicios Quadlet, actualiza Podman antes de este paso. Crea `~/.config/containers/systemd/mesa-viva.container` con este contenido y sustituye `USUARIO` por el nombre real de tu usuario Linux:
 
    ```ini
    [Unit]

@@ -64,3 +64,5 @@ La carta centra la información de bienvenida en el banner. El icono de luna/sol
 ## Despliegue en Pop!_OS
 
 Consulta [DESPLIEGUE_POP_OS.md](./DESPLIEGUE_POP_OS.md) para construir la imagen con Podman, iniciar Next.js en la laptop y, si sus recursos lo permiten, migrar de Supabase Cloud a Supabase self-hosted.
+
+La imagen de la fase 2 también está en [Docker Hub](https://hub.docker.com/r/chethhsitohuay/mesa-viva): `docker.io/chethhsitohuay/mesa-viva:6c54ed9`. Se compiló para el proyecto Supabase Cloud actual; una migración a Supabase self-hosted requiere reconstruirla con la nueva URL y clave publicable.

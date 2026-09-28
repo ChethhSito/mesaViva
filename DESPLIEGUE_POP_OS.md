@@ -19,19 +19,35 @@ Este proyecto usa Next.js 16.3.6, Supabase Auth, PostgreSQL y Realtime. La image
    podman --version
    ```
 
-2. Clona el proyecto y prepara un archivo de variables fuera del repositorio:
+2. Comprueba `uname -m`: la imagen publicada es para `x86_64`/`amd64`. Descárgala de Docker Hub; para esta instalación no necesitas clonar GitHub:
+
+   ```bash
+   podman pull docker.io/chethhsitohuay/mesa-viva:6c54ed9
+   ```
+
+   Crea `~/mesa-viva.env` con permisos restringidos y los valores del **mismo proyecto Supabase Cloud** usado para construir esta imagen:
+
+   ```bash
+   nano ~/mesa-viva.env
+   chmod 600 ~/mesa-viva.env
+   ```
+
+   ```dotenv
+   NEXT_PUBLIC_SUPABASE_URL=https://TU-PROYECTO.supabase.co
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
+   SUPABASE_SECRET_KEY=sb_secret_...
+   ```
+
+   `SUPABASE_SECRET_KEY` se entrega únicamente al contenedor en ejecución; no se encuentra en Docker Hub. Los valores públicos sí quedaron incorporados en el JavaScript de esta versión. No compartas el archivo de variables.
+
+3. Si necesitas cambiar el proyecto Supabase o fijar `NEXT_PUBLIC_APP_URL` para los QR, reconstruye desde GitHub y usa la nueva imagen en los pasos siguientes:
 
    ```bash
    git clone https://github.com/ChethhSito/mesaViva.git ~/mesaViva
    cd ~/mesaViva
-   cp .env.example ~/mesa-viva.env
-   chmod 600 ~/mesa-viva.env
-   nano ~/mesa-viva.env
    ```
 
-   Introduce los valores del proyecto Supabase **sin compartir** `SUPABASE_SECRET_KEY`. Para probar solo en la laptop, deja `NEXT_PUBLIC_APP_URL` vacío. Para QR accesibles desde celulares, usa una URL que los teléfonos puedan abrir; la URL final de producción es preferible antes de imprimir los QR.
-
-3. Construye la imagen. Las tres variables `NEXT_PUBLIC_*` se fijan durante la compilación. La clave secreta no se pasa al build:
+   Las tres variables `NEXT_PUBLIC_*` se fijan durante la compilación. La clave secreta no se pasa al build:
 
    ```bash
    cd ~/mesaViva
@@ -43,25 +59,25 @@ Este proyecto usa Next.js 16.3.6, Supabase Auth, PostgreSQL y Realtime. La image
      -f Dockerfile .
    ```
 
-4. Haz una prueba local sin publicar el puerto en toda la red:
+4. Haz una prueba local sin publicar el puerto en toda la red. Usa `localhost/mesa-viva:latest` si reconstruiste en el paso 3:
 
    ```bash
    podman run --rm --name mesa-viva-prueba \
      -p 127.0.0.1:3000:3000 \
      --env-file ~/mesa-viva.env \
-     localhost/mesa-viva:latest
+     docker.io/chethhsitohuay/mesa-viva:6c54ed9
    ```
 
    Abre `http://127.0.0.1:3000`. Prueba acceso del personal, menú QR, pedido, cocina y cuenta. Detén la prueba con `Ctrl+C`.
 
-5. Para mantener la aplicación iniciada al arrancar Pop!_OS, usa Quadlet de Podman **si la versión instalada lo incluye y usa cgroup v2**. Comprueba `podman --version` y `podman info --format '{{.Host.CgroupVersion}}'`; si tu versión no genera servicios Quadlet, actualiza Podman antes de este paso. Crea `~/.config/containers/systemd/mesa-viva.container` con este contenido y sustituye `USUARIO` por el nombre real de tu usuario Linux:
+5. Para mantener la aplicación iniciada al arrancar Pop!_OS, usa Quadlet de Podman **si la versión instalada lo incluye y usa cgroup v2**. Comprueba `podman --version` y `podman info --format '{{.Host.CgroupVersion}}'`; si tu versión no genera servicios Quadlet, actualiza Podman antes de este paso. Crea `~/.config/containers/systemd/mesa-viva.container` con este contenido y sustituye `USUARIO` por el nombre real de tu usuario Linux. Usa `Image=localhost/mesa-viva:latest` si reconstruiste en el paso 3:
 
    ```ini
    [Unit]
    Description=Mesa Viva Next.js
 
    [Container]
-   Image=localhost/mesa-viva:latest
+   Image=docker.io/chethhsitohuay/mesa-viva:6c54ed9
    PublishPort=127.0.0.1:3000:3000
    EnvironmentFile=/home/USUARIO/mesa-viva.env
 
@@ -81,7 +97,7 @@ Este proyecto usa Next.js 16.3.6, Supabase Auth, PostgreSQL y Realtime. La image
    sudo loginctl enable-linger "$USER"
    ```
 
-   Consulta los registros con `journalctl --user -u mesa-viva.service -f`. Para actualizar: `git pull`, reconstruye la imagen y ejecuta `systemctl --user restart mesa-viva.service`. Coloca un proxy HTTPS delante de `127.0.0.1:3000` antes de ofrecer acceso por Internet.
+   Consulta los registros con `journalctl --user -u mesa-viva.service -f`. Para actualizar una imagen de Docker Hub, cambia a una etiqueta publicada nueva y ejecuta `podman pull` y `systemctl --user restart mesa-viva.service`. Si reconstruyes desde código, usa `git pull`, reconstruye la imagen y reinicia el servicio. Coloca un proxy HTTPS delante de `127.0.0.1:3000` antes de ofrecer acceso por Internet.
 
 ## Fase 3: Supabase self-hosted, después de medir la laptop
 

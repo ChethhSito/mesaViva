@@ -1,0 +1,215 @@
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #f2f0ea;
+  --muted: #bac0c0;
+  --cream: #2c2e31;
+  --paper: #383b3f;
+  --line: #555a5f;
+  --green: #b7dfc0;
+  --orange: #ecc096;
+  --soft: #45494e;
+  --action: #355a43;
+  --action-hover: #426d51;
+  --button-dark: #50565b;
+}
+
+[data-theme="dark"] .eyebrow {
+  color: #d6b48f;
+}
+
+[data-theme="dark"] .input,
+[data-theme="dark"] textarea,
+[data-theme="dark"] .search-field,
+[data-theme="dark"] .quantity-control button,
+[data-theme="dark"] .staff-product-picker button {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--muted);
+}
+
+[data-theme="dark"] .empty-state {
+  background: var(--paper);
+  border-color: var(--line);
+}
+
+[data-theme="dark"] .notice.success,
+[data-theme="dark"] .ready-note,
+[data-theme="dark"] .ready-delivery {
+  background: #374b3d;
+  color: #d2ecd7;
+}
+
+[data-theme="dark"] .notice.error {
+  background: #513935;
+  color: #ffd3ca;
+}
+
+[data-theme="dark"] .landing {
+  background: var(--cream);
+}
+
+[data-theme="dark"] .hero {
+  background:
+    radial-gradient(circle at 77% 50%, #3a463d 0, #32383a 25%, transparent 48%),
+    var(--cream);
+}
+
+[data-theme="dark"] .hero:after {
+  color: #709b7b;
+}
+
+[data-theme="dark"] .hero p,
+[data-theme="dark"] .menu-hero p,
+[data-theme="dark"] .product-info p,
+[data-theme="dark"] .customer-footer {
+  color: var(--muted);
+}
+
+[data-theme="dark"] .customer-app,
+[data-theme="dark"] .staff-app {
+  background: var(--cream);
+}
+
+[data-theme="dark"] .table-pill {
+  background: var(--soft);
+}
+
+[data-theme="dark"] .menu-hero {
+  background: #373c3b;
+}
+
+[data-theme="dark"] .menu-hero:after {
+  border-color: rgba(183, 223, 192, 0.18);
+}
+
+[data-theme="dark"] .menu-hero h1,
+[data-theme="dark"] .hero-decoration {
+  color: #c7e5cc;
+}
+
+[data-theme="dark"] .search-field svg {
+  color: var(--muted);
+}
+
+[data-theme="dark"] .product-card {
+  border-color: var(--line);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="dark"] .product-card:hover {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.22);
+}
+
+[data-theme="dark"] .product-image {
+  background: #454b46;
+}
+
+[data-theme="dark"] .image-placeholder {
+  color: #bccab7;
+  background: radial-gradient(circle at 55% 40%, #515a50, #3d443f);
+}
+
+[data-theme="dark"] .product-info small {
+  color: var(--orange);
+}
+
+[data-theme="dark"] .close-button {
+  background: var(--soft);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .setup-page {
+  background: linear-gradient(120deg, #303734, #2c2e31);
+}
+
+[data-theme="dark"] .sidebar {
+  background: #222629;
+}
+
+[data-theme="dark"] .sidebar nav button:hover,
+[data-theme="dark"] .sidebar nav button.active {
+  background: #3e5145;
+}
+
+[data-theme="dark"] .live-dot {
+  color: #b7dfc0;
+}
+
+[data-theme="dark"] .live-dot:before {
+  box-shadow: 0 0 0 4px #3c5742;
+}
+
+[data-theme="dark"] .table-icon,
+[data-theme="dark"] .table-account {
+  background: #405447;
+}
+
+[data-theme="dark"] .status-badge {
+  background: #4b5052;
+  color: #eef0ed;
+}
+
+[data-theme="dark"] .status-available,
+[data-theme="dark"] .status-ready,
+[data-theme="dark"] .status-paid {
+  background: #34513d;
+  color: #c6ebcc;
+}
+
+[data-theme="dark"] .status-in_service,
+[data-theme="dark"] .status-open {
+  background: #364b5d;
+  color: #d4e9fa;
+}
+
+[data-theme="dark"] .status-bill_requested,
+[data-theme="dark"] .status-payment_pending {
+  background: #5c4736;
+  color: #f9dcbb;
+}
+
+[data-theme="dark"] .kds-column {
+  background: #34383c;
+}
+
+[data-theme="dark"] .kds-column h2 span {
+  background: #4a4e53;
+}
+
+[data-theme="dark"] .kds-ticket,
+[data-theme="dark"] .data-table-wrap {
+  background: var(--paper);
+}
+
+[data-theme="dark"] .ticket-notes {
+  background: #554637;
+  color: #f5d3af;
+}
+
+[data-theme="dark"] .data-table th {
+  background: #45494d;
+  color: var(--muted);
+}
+
+[data-theme="dark"] .availability {
+  background: #573d3b;
+  color: #ffd0cb;
+}
+
+[data-theme="dark"] .availability.available {
+  background: #354f3d;
+  color: #caecd0;
+}
+
+[data-theme="dark"] .staff-product-picker button:hover,
+[data-theme="dark"] .mobile-nav button.active {
+  background: var(--soft);
+}
+
+[data-theme="dark"] .mobile-nav button.active {
+  color: var(--green);
+}

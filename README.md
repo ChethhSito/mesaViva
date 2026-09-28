@@ -1,6 +1,18 @@
 # Mesa Viva
 
-Primer corte funcional del sistema descrito en [PROJECT.md — Restaurant QR Ordering System.md](./PROJECT.md%20%E2%80%94%20Restaurant%20QR%20Ordering%20System.md). Incluye el recorrido de mesa, menú QR, pedidos, cocina, sala, cuenta, caja y registro de ventas.
+Sistema de pedidos por QR para restaurantes. El cliente consulta la carta, hace pedidos y sigue su cuenta desde la mesa; el equipo gestiona cocina, sala y caja desde un panel. Este repositorio contiene una primera versión funcional para instalación local, basada en [Next.js](https://nextjs.org/) y [Supabase](https://supabase.com/).
+
+**Estado:** MVP funcional en entorno local. Aún quedan pendientes las pruebas de carga, los respaldos automáticos y la configuración de acceso público antes de utilizarlo como servicio de producción.
+
+## Qué incluye
+
+- Carta QR por mesa con categorías, precios, carrito, pedidos y estado de la cuenta.
+- Panel del personal para mesas, productos, cocina, sala, cobro y ventas básicas.
+- Roles de personal, validación de precios en el servidor y operaciones transaccionales para pedidos y pagos.
+- Avisos en tiempo real con consulta de respaldo y tema claro/oscuro.
+- Imagen de Next.js en [Docker Hub](https://hub.docker.com/r/chethhsitohuay/mesa-viva) y [guía de despliegue en Pop!_OS](./DESPLIEGUE_POP_OS.md).
+
+El alcance original y las decisiones de producto están en [PROJECT.md — Restaurant QR Ordering System.md](./PROJECT.md%20%E2%80%94%20Restaurant%20QR%20Ordering%20System.md).
 
 ## Requisitos
 
@@ -65,4 +77,4 @@ La carta centra la información de bienvenida en el banner. El icono de luna/sol
 
 Consulta [DESPLIEGUE_POP_OS.md](./DESPLIEGUE_POP_OS.md) para construir la imagen con Podman, iniciar Next.js en la laptop y, si sus recursos lo permiten, migrar de Supabase Cloud a Supabase self-hosted.
 
-La imagen de la fase 2 también está en [Docker Hub](https://hub.docker.com/r/chethhsitohuay/mesa-viva): `docker.io/chethhsitohuay/mesa-viva:6c54ed9`. Se compiló para el proyecto Supabase Cloud actual; una migración a Supabase self-hosted requiere reconstruirla con la nueva URL y clave publicable.
+Hay dos imágenes en [Docker Hub](https://hub.docker.com/r/chethhsitohuay/mesa-viva): `docker.io/chethhsitohuay/mesa-viva:6c54ed9` se compiló para la configuración anterior de Supabase Cloud; `docker.io/chethhsitohuay/mesa-viva:v2_credenciales` se compiló para la instalación local self-hosted del autor. Ambas incorporan la URL y la clave pública de su entorno en el JavaScript del navegador. Para otra instalación o para acceso desde otros dispositivos, reconstruye la imagen con tus propios valores `NEXT_PUBLIC_*` siguiendo la [guía de despliegue](./DESPLIEGUE_POP_OS.md). La clave secreta se proporciona únicamente al iniciar el contenedor.

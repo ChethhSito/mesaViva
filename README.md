@@ -14,7 +14,7 @@ Primer corte funcional del sistema descrito en [PROJECT.md — Restaurant QR Ord
    - `supabase/migrations/0001_core.sql`
    - `supabase/migrations/0002_realtime.sql`
    - `supabase/migrations/0003_staff_setup.sql`
-3. Copia `.env.example` a `.env.local` y completa la URL, la clave publicable y la clave secreta del proyecto. La clave secreta **solo** se usa en el servidor y nunca debe llevar el prefijo `NEXT_PUBLIC_`.
+3. Crea `.env.local` con `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` y `SUPABASE_SECRET_KEY`. La clave secreta **solo** se usa en el servidor y nunca debe llevar el prefijo `NEXT_PUBLIC_`. Consulta [la guía de despliegue](./DESPLIEGUE_POP_OS.md) para el formato de las variables.
 4. Inicia con `npm run dev` y abre `http://localhost:3000`.
 5. Crea una cuenta en `/acceso`. Si Supabase exige verificación por correo, confirma el correo antes de entrar. En `/panel` crea el restaurante, añade mesas, categorías y productos.
 6. En Mesas, abre una mesa y pulsa **Abrir carta** o **Mostrar QR**. El cliente entra por ese enlace público, sin iniciar sesión. También puedes ver el QR en Configuración. Abre el panel en otro navegador para probar cocina, sala y caja.

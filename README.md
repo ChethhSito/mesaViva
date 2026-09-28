@@ -48,33 +48,9 @@ Para añadir colaboradores: primero deben crear su propia cuenta en `/acceso`; l
 
 Las operaciones críticas de pedido y pago usan funciones SQL transaccionales. El identificador de envío evita pedidos duplicados al reintentar. Las tablas tienen RLS activo sin permisos directos de lectura/escritura desde el navegador. Las rutas del personal comprueban identidad, restaurante y rol antes de usar la clave de servicio. Realtime emite únicamente avisos vacíos: cada pantalla consulta los datos actualizados por su API. Hay una consulta de respaldo cada 15 segundos si se pierde un aviso.
 
-## Comprobaciones
-
-```sh
-npm run typecheck
-npm run lint
-npm run build
-npm run smoke -- --run
-```
-
-Para la prueba integral, deja `npm run dev` ejecutándose en otra terminal. `smoke` crea una cuenta, restaurante, mesa, productos, pedidos y pago sintéticos; verifica el flujo y elimina sus propios datos al terminar. No lo ejecutes mientras haces cambios manuales sobre esos datos de prueba.
-
 ## Estado actual
 
 La aplicación y las tres migraciones se verificaron en el proyecto Supabase conectado el 26/09/2026. La prueba integral pasó, incluidos los avisos de Realtime y la comprobación de que la clave pública no puede leer directamente las tablas. La prueba retiró sus datos sintéticos; para empezar a usar el sistema, crea una cuenta real desde `/acceso` y configura tu restaurante en `/panel`.
 
 Este corte no incluye variantes, inventario, facturación electrónica, pagos en línea ni reportes avanzados. Las imágenes de productos se introducen como URL; la subida a Supabase Storage queda para una siguiente iteración. El panel financiero muestra movimientos recientes y métricas básicas.
 
-## Tipografía de la prueba local
-
-Sensei, desde `fontnew/Sensei-Medium.otf`, se usa solo en los titulares grandes de la portada, la carta y el acceso. Red Hat Display se usa en los demás encabezados y Red Hat Text en el texto y los controles. Los tamaños comunes están definidos como variables en `src/app/globals.css`.
-
-El titular del proyecto confirmó que cuenta con permiso para distribuir Sensei. El repositorio y la imagen incluyen únicamente el archivo OTF utilizado por la aplicación; el PDF incluido originalmente en `fontnew` no acredita esa licencia y no se publica.
-
-La carta centra la información de bienvenida en el banner. El icono de luna/sol cambia entre tema claro y oscuro en la portada, la carta y el panel; la preferencia queda guardada en este navegador. El tema oscuro usa `#2c2e31` como fondo principal.
-
-## Despliegue en Pop!_OS
-
-Consulta [DESPLIEGUE_POP_OS.md](./DESPLIEGUE_POP_OS.md) para construir la imagen con Podman, iniciar Next.js en la laptop y, si sus recursos lo permiten, migrar de Supabase Cloud a Supabase self-hosted.
-
-Hay dos imágenes en [Docker Hub](https://hub.docker.com/r/chethhsitohuay/mesa-viva): `docker.io/chethhsitohuay/mesa-viva:6c54ed9` se compiló para la configuración anterior de Supabase Cloud; `docker.io/chethhsitohuay/mesa-viva:v2_credenciales` se compiló para la instalación local self-hosted del autor. Ambas incorporan la URL y la clave pública de su entorno en el JavaScript del navegador. Para otra instalación o para acceso desde otros dispositivos, reconstruye la imagen con tus propios valores `NEXT_PUBLIC_*` siguiendo la [guía de despliegue](./DESPLIEGUE_POP_OS.md). La clave secreta se proporciona únicamente al iniciar el contenedor.
